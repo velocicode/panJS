@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pandemic Setup</title>
+</head>
+<body>
+    <h2>Pandemic Setup</h2>
+    <label>Number of Player Cards:
+        <input type="number" id="numCards" value="57" />
+    </label><br />
+    <label>Number of Infection Cards:
+        <input type="number" id="numEscCards" value="7" />
+    </label><br />
+    <label>Number of Players:
+        <input type="number" id="numPlayers" value="4" />
+    </label><br />
+
+    <button id="next">Next</button>
+
+    <script type="module">
+        import { saveSetupData } from './panhelper.js';
+
+        document.getElementById('next').addEventListener('click', () => {
+            const numCards = parseInt(document.getElementById('numCards').value, 10);
+            const numEscCards = parseInt(document.getElementById('numEscCards').value, 10);
+            const numPlayers = parseInt(document.getElementById('numPlayers').value, 10);
+
+            saveSetupData(numCards, numEscCards, numPlayers);
+            window.location.href = 'enter-names.html';
+        });
+    </script>
+</body>
+</html>
