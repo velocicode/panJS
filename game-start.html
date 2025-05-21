@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Start</title>
+</head>
+<body>
+    <h2>Game Setup Summary</h2>
+    <div id="setupInfo"></div>
+    <div id="playerList"></div>
+
+    <script type="module">
+        import { getSetupData, getPlayerNames } from './panhelper.js';
+
+        const setup = getSetupData();
+        const names = getPlayerNames();
+
+        const setupDiv = document.getElementById('setupInfo');
+        setupDiv.innerHTML = `
+            <p><strong>Player Deck Cards:</strong> ${setup.numCards}</p>
+            <p><strong>Infection Cards:</strong> ${setup.numEscCards}</p>
+            <p><strong>Number of Players:</strong> ${setup.numPlayers}</p>
+        `;
+
+        const playerDiv = document.getElementById('playerList');
+        const ul = document.createElement('ul');
+        names.forEach((name, index) => {
+            const li = document.createElement('li');
+            li.textContent = `Player ${index + 1}: ${name}`;
+            ul.appendChild(li);
+        });
+        playerDiv.appendChild(ul);
+    </script>
+</body>
+</html>

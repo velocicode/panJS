@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter Player Names</title>
+</head>
+<body>
+    <h2>Enter Player Names</h2>
+    <form id="nameForm">
+        <div id="playerNameFields"></div>
+        <button type="submit">Continue</button>
+    </form>
+
+    <script type="module">
+        import { getSetupData, savePlayerNames } from './panhelper.js';
+
+        const { numPlayers } = getSetupData();
+        const container = document.getElementById('playerNameFields');
+
+        for (let i = 0; i < numPlayers; i++) {
+            const label = document.createElement('label');
+            label.textContent = `Player ${i + 1} Name: `;
+            label.style.display = 'block';
+
+            const input = document.createElement('input');
+            input.id = `playerName${i}`;
+            input.required = true;
+
+            container.appendChild(label);
+            container.appendChild(input);
+        }
+
+        document.getElementById('nameForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const names = [];
+
+            for (let i = 0; i < numPlayers; i++) {
+                const name = document.getElementById(`playerName${i}`).value.trim();
+                names.push(name);
+            }
+
+            savePlayerNames(names);
+            window.location.href = 'game-start.html';
+        });
+    </script>
+</body>
+</html>
